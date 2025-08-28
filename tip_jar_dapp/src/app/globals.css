@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --card: rgba(255, 255, 255, 0.72);
+  --card-border: rgba(0, 0, 0, 0.08);
+  --glass: rgba(255, 255, 255, 0.5);
+  --glass-border: rgba(255, 255, 255, 0.35);
+  --glow: 0 10px 40px rgba(56, 189, 248, 0.25);
+}
+
+/* Removed @theme inline block for broader tooling compatibility. */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+    --card: rgba(13, 13, 17, 0.7);
+    --card-border: rgba(255, 255, 255, 0.08);
+    --glass: rgba(255, 255, 255, 0.06);
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --glow: 0 10px 40px rgba(56, 189, 248, 0.3);
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Aurora animated gradient background */
+.bg-aurora {
+  background: linear-gradient(120deg,
+    rgba(56, 189, 248, 0.25),
+    rgba(99, 102, 241, 0.25),
+    rgba(236, 72, 153, 0.25)
+  );
+  background-size: 300% 300%;
+  animation: auroraMove 18s ease infinite;
+}
+
+@keyframes auroraMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Soft grid overlay for depth */
+.grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+}
+
+/* Glass card */
+.glass {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+}
+
+/* Hover lift utility */
+.lift {
+  transition: transform 300ms ease, box-shadow 300ms ease;
+}
+.lift:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--glow);
+}
+
+/* Shimmer line for separators */
+.shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2.2s linear infinite;
+}
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Float animation for decorative blobs */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Subtle fade-up */
+.fade-up {
+  opacity: 0;
+  transform: translateY(6px);
+  animation: fadeUp 480ms ease forwards;
+}
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
